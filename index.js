@@ -1,4 +1,4 @@
-let common = require('./common.js')
+import common from './common.js'
 common.hello();
-import es from './es.js'
+import es from './es.js' // Kasutage ES
 es.hello();
