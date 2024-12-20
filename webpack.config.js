@@ -1,5 +1,7 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { VueLoaderPlugin } from 'vue-loader';
+import loader from 'sass-loader';
 
 export default {
     entry: './src/index.js',
@@ -35,11 +37,16 @@ export default {
             }
           ],
         },
+        {
+          test: /\.vue$/,
+          loader: "vue-loader"
+        }
       ],
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: "./src/index.html",
       }),
+      new VueLoaderPlugin()
     ],
   };
