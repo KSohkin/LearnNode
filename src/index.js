@@ -12,6 +12,7 @@ import RickAndMorty from './pages/RickAndMorty.vue';
 import CookieClicker from './pages/CookieClicker.vue';
 import WebApis from './pages/WebApis.vue';
 import Leaflet from './pages/Leaflet.vue';
+import Chat from './pages/Chat.vue';
 
 const routes = [
   { path: '/', component: ToDo, name: 'ToDo' },
@@ -21,6 +22,7 @@ const routes = [
   { path: '/cookieclicker', component: CookieClicker, name: 'Cookie Clicker', meta: { container: false } },
   { path: '/webapis', component: WebApis, name: 'WebApis' },
   { path: '/leaflet', component: Leaflet, name: 'Leaflet', meta: { container: false } },
+  { path: '/chat', component: Chat, name: 'Chat' },
 ]
 
 const router = createRouter({
