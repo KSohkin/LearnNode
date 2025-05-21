@@ -5,7 +5,7 @@ let {info, current } = defineProps(['info', 'current']);
 
 let pageNumbers = computed(()=>{
     let pages = [];
-    for(let i = 1; i<=3; i++){
+    for(let i = 1; i<=3 && i<=info.pages; i++){
         pages[i] = i;
     }
     if(current > 2){
@@ -40,7 +40,7 @@ console.log(pageNumbers.value);
                     aria-current="page"
                     v-else-if="page === current">{{ page }}</a>
 
-                <a href="#"
+                <a @click="$emit('page', page)"
                     class="pagination-link"
                     :aria-label="`Goto page ${page}`"
                     v-else>{{ page }}</a>
