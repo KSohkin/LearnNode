@@ -8,19 +8,13 @@ let input = ref('');
 let res = await axios.get('http://localhost:3000');
 messages.value = res.data;
 
-longpoll();
+const eventSource = new EventSource('http://localhost:3000/sse');
 
-function longpoll(){
-    let date = messages.value[messages.value.length-1]?.date ?? null;
-    axios.get('http://localhost:3000/longpoll', {
-        params: {
-            date: new Date(date)
-        }
-    }).then(res => {
-        messages.value.push(...res.data);
-        longpoll();
-    });
-}
+eventSource.addEventListener('newmessage', event => {
+    console.log(event);
+    let data = JSON.parse(event.data);
+    messages.value.push(...data);
+});
 
 
 async function send(){
