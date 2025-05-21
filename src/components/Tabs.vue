@@ -1,19 +1,17 @@
 <script setup>
-import { ref } from 'vue';
-defineProps(['items']);
-const emit = defineEmits(['change']);
-let active = ref(0);
+import { useRoute, useRouter } from 'vue-router';
 
-function setActive(key){
-    active.value = key;
-    emit('change', key);
-}
+const router = useRouter();
+const route = useRoute();
+
+console.log(router.getRoutes(), route);
+
 </script>
 <template>
     <div class="tabs is-centered">
         <ul>
-            <li v-for="(item,key) in items" :class="{'is-active': key==active}" @click="setActive(key)">
-                <a>{{ item }}</a>
+            <li v-for="(item,key) in $router.getRoutes()" :class="{'is-active': item.path === $route.path}" >
+                <RouterLink :to="item.path">{{ item.name }}</RouterLink>
             </li>
         </ul>
     </div>
