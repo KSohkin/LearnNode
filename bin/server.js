@@ -4,6 +4,8 @@ const port = 3000;
 
 let messages = [];
 
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -15,6 +17,16 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     let date = req.query.date ?? null;
     let filteredMessages = messages.filter(message => message.date > new Date(date));
+    res.json(filteredMessages);
+});
+
+app.get('/longpoll', async (req, res) => {
+    let date = req.query.date ?? null;
+    let filteredMessages;
+    do {
+        await sleep(1000);
+        filteredMessages = messages.filter(message => message.date > new Date(date));
+    } while(filteredMessages.length === 0)
     res.json(filteredMessages);
 });
 
